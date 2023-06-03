@@ -64,8 +64,10 @@ app.use((req, res, next) => {
 //Routes
 const indexRoutes = require('./routes/index')
 const userRoutes = require('./routes/user')
+const universityRoutes = require('./routes/university')
 app.use('/',indexRoutes)
 app.use('/user',userRoutes)
+app.use('/university',universityRoutes)
 
 //Start the server
 app.listen(PORT, () => {

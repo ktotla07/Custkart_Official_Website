@@ -1,5 +1,5 @@
 const User = require('../models/User')
-const Document = require('../models/Document')
+const DocUniversity = require('../models/DocUniversity')
 const jwt = require('jsonwebtoken')
 const { signupMail, passwordMail } = require('../config/nodemailer')
 const path = require('path')
@@ -27,12 +27,6 @@ module.exports.signup_get = (req, res) => {
 module.exports.login_get = (req, res) => {
     res.render('./userViews/login', {
         type: 'login',
-    })
-}
-
-module.exports.about_get = (req, res) => {
-    res.render('./userViews/about', {
-        type: 'about',
     })
 }
 
@@ -217,11 +211,11 @@ module.exports.createPost = async (req, res) => {
         Crop: 'fill'
       });
       console.log(url)
-      const document = new Document({ name, desc,url,user:req.user._id})
+      const document = new DocUniversity({ name, desc,url,user:req.user._id})
       let saveDocument = await document.save()
-      const userDoc=req.user.document
-      userDoc.push(document._id)
-      await Document.findOneAndUpdate({_id: req.user._id}, {$set:{document:userDoc}}, {new: true}, (err, doc) => {
+      const universityDoc=req.university.document
+      universityDoc.push(document._id)
+      await DocUniversity.findOneAndUpdate({_id: req.university._id}, {$set:{document:universityDoc}}, {new: true}, (err, doc) => {
         if (err) {
             // console.log("Something wrong when updating data!");
             req.flash("error_msg", "Something wrong when updating data!")
