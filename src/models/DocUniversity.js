@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const documentSchema = mongoose.Schema({
+const docUniversitySchema = mongoose.Schema({
     name: {
         type: String,
         trim: true,
@@ -16,12 +16,12 @@ const documentSchema = mongoose.Schema({
     },
     user:{
         type: mongoose.Schema.Types.ObjectId ,
-        ref:'User'
+        ref:'University'
     }
 })
 
 
 
-const Document = mongoose.model('Document', documentSchema)
+const DocUniversity = mongoose.model('DocUniversity', docUniversitySchema)
 
-module.exports = Document
+module.exports = DocUniversity
