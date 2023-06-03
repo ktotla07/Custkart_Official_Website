@@ -30,6 +30,12 @@ module.exports.login_get = (req, res) => {
     })
 }
 
+module.exports.about_get = (req, res) => {
+    res.render('./userViews/about', {
+        type: 'about',
+    })
+}
+
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
     
