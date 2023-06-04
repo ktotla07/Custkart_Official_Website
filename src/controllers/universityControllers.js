@@ -1,7 +1,7 @@
-const User = require('../models/User')
+const University = require('../models/University')
 const DocUniversity = require('../models/DocUniversity')
 const jwt = require('jsonwebtoken')
-const { signupMail, passwordMail } = require('../config/nodemailer')
+const { signupMailUni, passwordMailUni } = require('../config/nodemailer')
 const path = require('path')
 const { handleErrors } = require('../utilities/Utilities')
 const crypto = require('crypto')
@@ -19,13 +19,13 @@ cloudinary.config({
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-    res.render('./userViews/signup', {
+    res.render('./universityViews/signup', {
         type: 'signup',
     })
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('./userViews/login', {
+    res.render('./universityViews/login', {
         type: 'login',
     })
 }
@@ -43,30 +43,30 @@ module.exports.signup_post = async (req, res) => {
     console.log('in sign up route', req.body)
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
-        res.status(400).redirect('/user/login')
+        res.status(400).redirect('/university/login')
         return
     }
 
     try {
-        const userExists = await User.findOne({ email })
-        console.log('userexists', userExists)
-        /*if(userExists && userExists.active== false)
+        const universityExists = await University.findOne({ email })
+        console.log('universityexists', universityExists)
+        /*if(universityExists && universityExists.active== false)
     {
-      req.flash("success_msg",`${userExists.name}, we have sent you a link to verify your account kindly check your mail`)
+      req.flash("success_msg",`${universityExists.name}, we have sent you a link to verify your account kindly check your mail`)
 
-      signupMail(userExists,req.hostname,req.protocol)
+      signupMail(universityExists,req.hostname,req.protocol)
       return res.redirect("/signup")
     }*/
-        if (userExists) {
+        if (universityExists) {
             req.flash(
                 'success_msg',
                 'This email is already registered. Try logging in'
             )
-            return res.redirect('/user/login')
+            return res.redirect('/university/login')
         }
         const short_id = generateShortId(name,phoneNumber);
         // console.log('Short ID generated is: ', short_id)
-        const user = new User({
+        const university = new University({
             email,
             name,
             password,
@@ -74,15 +74,15 @@ module.exports.signup_post = async (req, res) => {
             short_id,
             
         })
-        let saveUser = await user.save()
-        //console.log(saveUser);
+        let saveUniversity = await university.save()
+        //console.log(saveuniversity);
         req.flash(
             'success_msg',
             'Registration successful. Check your inbox to verify your email'
         )
-        signupMail(saveUser, req.hostname, req.protocol)
-        //res.send(saveUser)
-        res.redirect('/user/login')
+        signupMail(saveUniversity, req.hostname, req.protocol)
+        //res.send(saveuniversity)
+        res.redirect('/university/login')
     } catch (err) {
         const errors = handleErrors(err)
         console.log(errors)
@@ -95,13 +95,13 @@ module.exports.signup_post = async (req, res) => {
         )
         //res.json(errors);
         req.flash('error_msg', message)
-        res.status(400).redirect('/user/signup')
+        res.status(400).redirect('/university/signup')
     }
 }
 module.exports.emailVerify_get = async (req, res) => {
     try {
-        const userID = req.params.id
-        const expiredTokenUser = await User.findOne({ _id: userID })
+        const universityID = req.params.id
+        const expiredTokenuniversity = await University.findOne({ _id: universityID })
         const token = req.query.tkn
         //console.log(token)
         jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
@@ -110,36 +110,36 @@ module.exports.emailVerify_get = async (req, res) => {
                     'error_msg',
                     ' Your verify link had expired. We have sent you another verification link'
                 )
-                signupMail(expiredTokenUser, req.hostname, req.protocol)
-                return res.redirect('/user/login')
+                signupMailUni(expiredTokenuniversity, req.hostname, req.protocol)
+                return res.redirect('/university/login')
             }
-            const user = await User.findOne({ _id: decoded.id })
-            if (!user) {
-                //console.log('user not found')
+            const university = await University.findOne({ _id: decoded.id })
+            if (!university) {
+                //console.log('university not found')
                 res.redirect('/')
             } else {
-                const activeUser = await User.findByIdAndUpdate(user._id, {
+                const activeuniversity = await University.findByIdAndUpdate(university._id, {
                     active: true,
                 })
-                if (!activeUser) {
+                if (!activeuniversity) {
                     // console.log('Error occured while verifying')
                     req.flash('error_msg', 'Error occured while verifying')
                     res.redirect('/')
                 } else {
                     req.flash(
                         'success_msg',
-                        'User has been verified and can login now'
+                        'university has been verified and can login now'
                     )
-                    //console.log('The user has been verified.')
-                    //console.log('active', activeUser)
-                    res.redirect('/user/login')
+                    //console.log('The university has been verified.')
+                    //console.log('active', activeuniversity)
+                    res.redirect('/university/login')
                 }
             }
         })
     } catch (e) {
         console.log(e)
-        //signupMail(user,req.hostname,req.protocol)
-        res.redirect('/user/login')
+        //signupMail(university,req.hostname,req.protocol)
+        res.redirect('/university/login')
     }
 }
 
@@ -148,15 +148,15 @@ module.exports.login_post = async (req, res) => {
     // console.log('in Login route')
     // console.log('req.body',req.body)
     try {
-        const user = await User.login(email, password)
-        //console.log("user",user)
+        const university = await University.login(email, password)
+        //console.log("university",university)
 
-        const userExists = await User.findOne({ email })
-        console.log("userexsits",userExists)
+        const universityExists = await University.findOne({ email })
+        console.log("universityexsits",universityExists)
 
-        if (!userExists.active) {
+        if (!universityExists.active) {
             const currDate = new Date()
-            const initialUpdatedAt = userExists.updatedAt
+            const initialUpdatedAt = universityExists.updatedAt
             const timeDiff = Math.abs(
                 currDate.getTime() - initialUpdatedAt.getTime()
             )
@@ -164,36 +164,36 @@ module.exports.login_post = async (req, res) => {
                 // console.log('Email already sent check it')
                 req.flash(
                     'error_msg',
-                    `${userExists.name}, we have already sent you a verify link please check your email`
+                    `${universityExists.name}, we have already sent you a verify link please check your email`
                 )
-                res.redirect('/user/login')
+                res.redirect('/university/login')
                 return
             }
             req.flash(
                 'success_msg',
-                `${userExists.name}, your verify link has expired we have sent you another email please check you mailbox`
+                `${universityExists.name}, your verify link has expired we have sent you another email please check you mailbox`
             )
-            signupMail(userExists, req.hostname, req.protocol)
-            await User.findByIdAndUpdate(userExists._id, {
+            signupMailUni(universityExists, req.hostname, req.protocol)
+            await University.findByIdAndUpdate(universityExists._id, {
                 updatedAt: new Date(),
             })
-            //console.log('userExists',userExists)
-            res.redirect('/user/login')
+            //console.log('universityExists',universityExists)
+            res.redirect('/university/login')
             return
         }
 
-        const token = user.generateAuthToken(maxAge)
+        const token = university.generateAuthToken(maxAge)
 
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-        //console.log(user);
-        //signupMail(saveUser)
+        res.cookie('university', token, { httpOnly: true, maxAge: maxAge * 1000 })
+        //console.log(university);
+        //signupMail(saveuniversity)
         // console.log("logged in")
         req.flash('success_msg', 'Successfully logged in')
-        res.status(200).redirect('/user/profile')
+        res.status(200).redirect('/university/profile')
     } catch (err) {
         req.flash('error_msg', 'Invalid Credentials')
         //console.log(err)
-        res.redirect('/user/login')
+        res.redirect('/university/login')
     }
 }
 
@@ -203,7 +203,7 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.profile_get = async (req, res) => {
     
-    res.json(req.user)
+    res.json(req.university)
     // console.log('in profile page')
 }
 module.exports.createPost = async (req, res) => {
@@ -218,7 +218,7 @@ module.exports.createPost = async (req, res) => {
         Crop: 'fill'
       });
       console.log(url)
-      const document = new DocUniversity({ name, desc,url,user:req.user._id})
+      const document = new DocUniversity({ name, desc,url,university:req.university._id})
       let saveDocument = await document.save()
       const universityDoc=req.university.document
       universityDoc.push(document._id)
@@ -231,7 +231,7 @@ module.exports.createPost = async (req, res) => {
     });
       
       console.log(saveDocument)
-    res.render('./userViews/index')
+    res.render('./universityViews/index')
 }
 
 module.exports.logout_get = async (req, res) => {
@@ -239,7 +239,7 @@ module.exports.logout_get = async (req, res) => {
     // const cookie = req.cookies.jwt
     res.clearCookie('jwt')
     req.flash('success_msg', 'Successfully logged out')
-    res.redirect('/user/login')
+    res.redirect('/university/login')
 }
 
 // module.exports.upload_get =async (req, res) => {
@@ -247,55 +247,55 @@ module.exports.logout_get = async (req, res) => {
 // }
 
 module.exports.getForgotPasswordForm = async (req, res) => {
-    res.render('./userViews/forgotPassword')
+    res.render('./universityViews/forgotPassword')
 }
 
 module.exports.getPasswordResetForm = async (req, res) => {
-    const userID = req.params.id
-    const user = await User.findOne({ _id: userID })
+    const universityID = req.params.id
+    const university = await university.findOne({ _id: universityID })
     const resetToken = req.params.token
-    res.render('./userViews/resetPassword', {
-        userID,
+    res.render('./universityViews/resetPassword', {
+        universityID,
         resetToken,
     })
 }
 
 module.exports.forgotPassword = async (req, res) => {
     const email = req.body.email
-    const user = await User.findOne({ email })
-    if (!user) {
-        req.flash('error_msg', 'No user found')
-        return res.redirect('/user/login')
+    const university = await university.findOne({ email })
+    if (!university) {
+        req.flash('error_msg', 'No university found')
+        return res.redirect('/university/login')
     }
-    //console.log(user)
-    const userID = user._id
+    //console.log(university)
+    const universityID = university._id
 
-    const dt = new Date(user.passwordResetExpires).getTime()
+    const dt = new Date(university.passwordResetExpires).getTime()
     if (
-        (user.passwordResetToken && dt > Date.now()) ||
-        !user.passwordResetToken
+        (university.passwordResetToken && dt > Date.now()) ||
+        !university.passwordResetToken
     ) {
-        const resetToken = user.createPasswordResetToken()
-        // console.log(user.passwordResetExpires)
-        // console.log(user.passwordResetToken)
-        await user.save({ validateBeforeSave: false })
+        const resetToken = university.createPasswordResetToken()
+        // console.log(university.passwordResetExpires)
+        // console.log(university.passwordResetToken)
+        await university.save({ validateBeforeSave: false })
         try {
-            passwordMail(user, resetToken, req.hostname, req.protocol)
+            passwordMailUni(university, resetToken, req.hostname, req.protocol)
             req.flash('success_msg', 'Email sent,please check email')
-            res.redirect('/user/forgotPassword')
+            res.redirect('/university/forgotPassword')
         } catch (err) {
-            user.passwordResetToken = undefined
-            user.passwordResetExpires = undefined
-            await user.save({ validateBeforeSave: false })
+            university.passwordResetToken = undefined
+            university.passwordResetExpires = undefined
+            await university.save({ validateBeforeSave: false })
             req.flash('error_msg', 'Unable to send mail')
-            res.redirect('/user/forgotPassword')
+            res.redirect('/university/forgotPassword')
         }
     } else {
         req.flash(
             'error_msg',
             'Mail already send,please wait for sometime to send again'
         )
-        res.redirect('/user/forgotPassword')
+        res.redirect('/university/forgotPassword')
     }
 }
 
@@ -307,30 +307,30 @@ module.exports.resetPassword = async (req, res) => {
             .createHash('sha256')
             .update(req.params.token)
             .digest('hex')
-        const user = await User.findOne({
+        const university = await university.findOne({
             _id: req.params.id,
             passwordResetToken: hashedToken,
             passwordResetExpires: { $gt: Date.now() },
         })
-        if (!user) {
-            req.flash('error_msg', 'No user found')
-            return res.redirect('/user/login')
+        if (!university) {
+            req.flash('error_msg', 'No university found')
+            return res.redirect('/university/login')
         }
         if (req.body.password !== req.body.cpassword) {
             req.flash('error_msg', 'Passwords dont match')
             return res.redirect(`resetPassword/${id}/${token}`)
         } else {
-            user.password = req.body.password
-            user.passwordResetToken = undefined
-            user.passwordResetExpires = undefined
-            await user.save()
-            const JWTtoken = await user.generateAuthToken(maxAge)
-            // user = user.toJSON()
+            university.password = req.body.password
+            university.passwordResetToken = undefined
+            university.passwordResetExpires = undefined
+            await university.save()
+            const JWTtoken = await university.generateAuthToken(maxAge)
+            // university = university.toJSON()
             res.cookie('jwt', JWTtoken, {
                 maxAge: 24 * 60 * 60 * 1000,
                 httpOnly: false,
             })
-            res.redirect('/user/profile')
+            res.redirect('/university/profile')
         }
     } catch (err) {
         res.send(err)
