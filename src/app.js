@@ -65,8 +65,10 @@ app.use((req, res, next) => {
 const indexRoutes = require('./routes/index')
 const userRoutes = require('./routes/user')
 const universityRoutes = require('./routes/university')
+const adminRoutes = require('./routes/admin')
 app.use('/',indexRoutes)
 app.use('/user',userRoutes)
+app.use('/admin',adminRoutes)
 app.use('/university',universityRoutes)
 
 //Start the server

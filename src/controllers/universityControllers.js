@@ -30,6 +30,13 @@ module.exports.login_get = (req, res) => {
     })
 }
 
+module.exports.dashboard_get = (req, res) => {
+    res.render('./admin/dashboard', {
+        type: 'dashboard',
+    })
+}
+
+
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
     

@@ -59,6 +59,7 @@ router.get('/logout', requireAuth, authController.logout_get)
 router.get('/profile', requireAuth, authController.profile_get)
 router.get('/about', authController.about_get)
 router.post('/createPost',requireAuth,upload.single('photo'), authController.createPost)
+router.get('/productPage', authController.productPage_get)
 
 
 
