@@ -58,8 +58,10 @@ router.post('/login', authController.login_post)
 router.get('/logout', requireAuth, authController.logout_get)
 router.get('/profile', requireAuth, authController.profile_get)
 router.get('/about', authController.about_get)
-router.post('/createPost',requireAuth,upload.single('photo'), authController.createPost)
 
+
+router.post('/createPost',requireAuth,upload.single('photo'), authController.createPost)
+router.get('/requestUniversity/:id',requireAuth, authController.requestUniversity)
 
 
 router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)

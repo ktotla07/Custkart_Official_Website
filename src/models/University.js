@@ -26,6 +26,18 @@ const universitySchema = mongoose.Schema(
                 ref: 'DocUniversity',
             },
         ],
+        requestedUsers: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'DocUniversity',
+            },
+        ],
+        permittedUsers: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'DocUniversity',
+            },
+        ],
         email: {
             type: String,
             trim: true,

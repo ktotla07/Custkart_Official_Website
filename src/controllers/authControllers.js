@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const University = require('../models/University')
 const Document = require('../models/Document')
 const jwt = require('jsonwebtoken')
 const { signupMail, passwordMail } = require('../config/nodemailer')
@@ -336,7 +337,11 @@ module.exports.resetPassword = async (req, res) => {
     }
 }
 
-
+module.exports.requestUniversity = async (req, res) => {
+    const id=req.params.id
+    const university = await University.findOne({ _id: id })
+    
+}
 
 
 
