@@ -43,6 +43,12 @@ module.exports.productPage_get = (req, res) => {
     })
 }
 
+module.exports.product_get = (req, res) => {
+    res.render('./userViews/product', {
+        type: 'product',
+    })
+}
+
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
     

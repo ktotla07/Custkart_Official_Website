@@ -30,3 +30,8 @@ module.exports.login_post = async(req, res) => {
     }
     res.redirect('/admin/login')
 }
+module.exports.aboutUniversity_get = (req, res) => {
+    res.render('./admin/aboutUniversity', {
+        type: 'dashboard',
+    })
+}
