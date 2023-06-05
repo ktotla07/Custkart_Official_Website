@@ -202,6 +202,7 @@
                   <% for(var d of university2.requestedUsers){ %>
                     <div class="alert alert-primary" role="alert">
                       <%=d.name%>  
+                      <a href="/admin/permitUser/<%=university2._id%>/<%=d._id%>"  class="btn btn-primary allign-left">Accept</a>
                     </div>
                     <%}%>
                   
