@@ -31,8 +31,39 @@ module.exports.login_post = async(req, res) => {
     }else 
     res.redirect('/admin/login')
 }
-module.exports.aboutUniversity_get = (req, res) => {
-    res.render('./admin/aboutUniversity', {
-        type: 'dashboard',
-    })
+module.exports.aboutUniversity_get = async (req, res) => {
+    const id=req.params.id
+    const university = await University.findOne({ _id: id })
+    const university1 = await university.populate('requestedUsers').execPopulate()
+    const university2 = await university1.populate('permittedUsers').execPopulate()
+    res.send(university2)
+    // res.render('./admin/aboutUniversity', {
+    //     university2
+    // })
+}
+module.exports.permitUser_get = async (req, res) => {
+    const id=req.params.id
+    const userId=req.params.userId
+    const university = await University.findOne({ _id: id })
+    const requestedUsers=university.requestedUsers
+    const permittedUsers=university.permittedUsers 
+    if(requestedUsers.includes(userId)){
+        requestedUsers.remove(userId)
+        permittedUsers.push(userId)
+        
+        await University.findOneAndUpdate({_id: id}, {$set:{requestedUsers}}, {new: true}, (err, doc) => {
+            if (err) {
+                res.redirect('/')
+            }
+        });
+        await University.findOneAndUpdate({_id: id}, {$set:{permittedUsers}}, {new: true}, (err, doc) => {
+            if (err) {
+                res.redirect('/')
+            }
+        });
+    }
+    res.send("success")
+    // res.render('./admin/aboutUniversity', {
+    //     university2
+    // })
 }

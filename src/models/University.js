@@ -29,13 +29,13 @@ const universitySchema = mongoose.Schema(
         requestedUsers: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'DocUniversity',
+                ref: 'User',
             },
         ],
         permittedUsers: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'DocUniversity',
+                ref: 'User',
             },
         ],
         email: {

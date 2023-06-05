@@ -361,7 +361,7 @@ module.exports.requestUniversity = async (req, res) => {
             }
         });
     }
-    res.redirect('/')
+    res.send('success')
 }
 
 

@@ -65,7 +65,7 @@ module.exports.signup_post = async (req, res) => {
             return res.redirect('/university/login')
         }
         const short_id = generateShortId(name,phoneNumber);
-        // console.log('Short ID generated is: ', short_id)
+        console.log('Short ID generated is: ', short_id)
         const university = new University({
             email,
             name,
@@ -75,12 +75,12 @@ module.exports.signup_post = async (req, res) => {
             
         })
         let saveUniversity = await university.save()
-        //console.log(saveuniversity);
+        console.log(saveUniversity);
         req.flash(
             'success_msg',
             'Registration successful. Check your inbox to verify your email'
         )
-        signupMail(saveUniversity, req.hostname, req.protocol)
+        signupMailUni(saveUniversity, req.hostname, req.protocol)
         //res.send(saveuniversity)
         res.redirect('/university/login')
     } catch (err) {
@@ -188,12 +188,11 @@ module.exports.login_post = async (req, res) => {
         //console.log(university);
         //signupMail(saveuniversity)
         // console.log("logged in")
-        req.flash('success_msg', 'Successfully logged in')
-        res.status(200).redirect('/university/profile')
+        res.status(200).send("success")
     } catch (err) {
         req.flash('error_msg', 'Invalid Credentials')
         //console.log(err)
-        res.redirect('/university/login')
+        res.send(err)
     }
 }
 
