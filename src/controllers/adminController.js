@@ -23,6 +23,7 @@ module.exports.login_get = async(req, res) => {
 }
 module.exports.login_post = async(req, res) => {
     const {name,password}=req.body
+    console.log(res.body)
     if(name==process.env.name && password==process.env.password){
 
         res.cookie('admin', 'admin', { httpOnly: true, maxAge: maxAge * 1000 })
