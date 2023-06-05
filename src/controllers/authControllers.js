@@ -37,6 +37,12 @@ module.exports.about_get = (req, res) => {
     })
 }
 
+module.exports.productPage_get = (req, res) => {
+    res.render('./userViews/productPage', {
+        type: 'productPage',
+    })
+}
+
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
     
@@ -340,7 +346,16 @@ module.exports.resetPassword = async (req, res) => {
 module.exports.requestUniversity = async (req, res) => {
     const id=req.params.id
     const university = await University.findOne({ _id: id })
-    
+    const requestedUsers=university.requestedUsers
+    if(!requestedUsers.includes(req.user._id)){
+        requestedUsers.push(req.user._id)
+        await University.findOneAndUpdate({_id: id}, {$set:{requestedUsers}}, {new: true}, (err, doc) => {
+            if (err) {
+                res.redirect('/')
+            }
+        });
+    }
+    res.redirect('/')
 }
 
 
