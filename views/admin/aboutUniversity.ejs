@@ -199,9 +199,11 @@
               <div class="card mb-0">
                 <div class="card-body p-4">
                   
-                  <div class="alert alert-primary" role="alert">
-                 vjhvjhv   
-                  </div>
+                  <% for(var d of university2.requestedUsers){ %>
+                    <div class="alert alert-primary" role="alert">
+                      <%=d.name%>  
+                    </div>
+                    <%}%>
                   
                 </div>
               </div>
@@ -216,11 +218,11 @@
                   <h5 class="card-title fw-semibold mb-4">List Of Requested Ambassador</h5>
                   <div class="card mb-0">
                     <div class="card-body p-4">
-                      
+                      <% for(var d of university2.permittedUsers){ %>
                       <div class="alert alert-primary" role="alert">
-                     vjhvjhv   
+                        <%=d.name%>  
                       </div>
-                      
+                      <%}%>
                     </div>
                   </div>
                 </div>

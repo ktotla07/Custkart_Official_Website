@@ -200,7 +200,7 @@
                 <div class="card-body p-4">
                   <% for(var d of universities) { %>
                   <div class="alert alert-primary" role="alert">
-                    <%=d.name%>
+                    <a href="/admin/aboutUniversity/<%=d._id%>"><%=d.name%></a>
                   </div>
                   <% } %>
                 </div>

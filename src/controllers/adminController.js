@@ -36,10 +36,10 @@ module.exports.aboutUniversity_get = async (req, res) => {
     const university = await University.findOne({ _id: id })
     const university1 = await university.populate('requestedUsers').execPopulate()
     const university2 = await university1.populate('permittedUsers').execPopulate()
-    res.send(university2)
-    // res.render('./admin/aboutUniversity', {
-    //     university2
-    // })
+    // res.send(university2)
+    res.render('./admin/aboutUniversity', {
+        university2
+    })
 }
 module.exports.permitUser_get = async (req, res) => {
     const id=req.params.id
