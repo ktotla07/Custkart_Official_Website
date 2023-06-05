@@ -62,6 +62,9 @@ router.post('/createPost',requireAuth,upload.single('photo'), authController.cre
 router.get('/productPage', authController.productPage_get)
 router.get('/product', authController.product_get)
 
+router.post('/createPost',requireAuth,upload.single('photo'), authController.createPost)
+router.get('/requestUniversity/:id',requireAuth, authController.requestUniversity)
+
 
 router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)
 router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)

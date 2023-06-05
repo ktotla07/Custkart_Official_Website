@@ -19,13 +19,13 @@ cloudinary.config({
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-    res.render('./universityViews/signup', {
+    res.render('./userViews/signupInstitute', {
         type: 'signup',
     })
 }
 
 module.exports.login_get = (req, res) => {
-    res.render('./universityViews/login', {
+    res.render('./userViews/loginInstitute', {
         type: 'login',
     })
 }
