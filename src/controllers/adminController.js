@@ -23,12 +23,12 @@ module.exports.login_get = async(req, res) => {
 }
 module.exports.login_post = async(req, res) => {
     const {name,password}=req.body
-    console.log(res.body)
+    console.log(res.body,process.env.name,process.env.password)
     if(name==process.env.name && password==process.env.password){
 
         res.cookie('admin', 'admin', { httpOnly: true, maxAge: maxAge * 1000 })
         res.redirect('/admin/dashboard')
-    }
+    }else 
     res.redirect('/admin/login')
 }
 module.exports.aboutUniversity_get = (req, res) => {
