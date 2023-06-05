@@ -199,30 +199,27 @@
               <div class="card mb-0">
                           <div class="card">
                             <div class="card-body">
-                              <form>
+                              <form method="POST" action="/admin/createProduct"
+                              enctype="multipart/form-data">
                                 <div class="mb-3">
                                   <label for="product" class="form-label">Name</label>
-                                  <input type="email" class="form-control" id="product" aria-describedby="product">
+                                  <input type="text" name="name" class="form-control" id="product" aria-describedby="product">
                                 </div>
                                 <div class="mb-3">
                                   <label for="picture" class="form-label">Front Image</label>
-                                  <input type="file" id="file" class="form-control" name="file" multiple />
+                                  <input type="file" id="file" name="front"class="form-control" name="file" multiple />
                                 </div>
                                 <div class="mb-3">
                                     <label for="picture" class="form-label">Back Image</label>
-                                    <input type="file" id="file" class="form-control" name="file" multiple />
+                                    <input type="file" id="file"name="back" class="form-control" name="file" multiple />
                                   </div>
                                 <div class="mb-3">
                                     <label for="price" class="form-label">Price</label>
-                                    <input type="price" class="form-control" id="price">
+                                    <input type="price"name="price" class="form-control" id="price">
                                   </div>
                                   <div class="mb-3">
                                     <label for="price" class="form-label">Product Details</label>
-                                    <textarea id="productDetails"  class="form-control" name="productDetails" rows="4" cols="50"></textarea>
-                                  </div>
-                                  <div class="mb-3">
-                                    <label for="price" class="form-label">Product Details</label>
-                                    <textarea id="productDetails"class="form-control"  name="productDetails" rows="4" cols="50"></textarea>
+                                    <textarea id="productDetails"name="desc"  class="form-control" name="productDetails" rows="4" cols="50"></textarea>
                                   </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                               </form>
