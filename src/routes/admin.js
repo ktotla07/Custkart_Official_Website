@@ -16,5 +16,7 @@ router.post('/login', adminController.login_post)
 router.get('/aboutUniversity/:id',requireAuth, adminController.aboutUniversity_get)
 router.get('/permitUser/:id/:userId',requireAuth, adminController.permitUser_get)
 router.get('/handleInstitute', requireAuth,adminController.handleInstitute_get)
+router.get('/addProduct',requireAuth, adminController.addProduct_get)
+
 
 module.exports = router

@@ -11,12 +11,18 @@ const maxAge = 30 * 24 * 60 * 60
 module.exports.dashboard_get = async(req, res) => {
     res.render('./admin/dashboard')
 }
+
+module.exports.addProduct_get = async(req, res) => {
+    res.render('./admin/addProduct')
+}
+
 module.exports.handleInstitute_get = async(req, res) => {
     const universities=await University.find({})
     res.render('./admin/handleInstitute',{
         universities
     })
 }
+
 module.exports.login_get = async(req, res) => {
     
     res.render('./admin/login')
