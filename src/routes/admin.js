@@ -13,8 +13,10 @@ router.get('/dashboard',requireAuth, adminController.dashboard_get)
 router.get('/handleInstitute',requireAuth, adminController.handleInstitute_get)
 router.get('/login',redirectIfLoggedIn, adminController.login_get)
 router.post('/login', adminController.login_post)
-router.get('/dashboard', adminController.dashboard_get)
-router.get('/aboutUniversity', adminController.aboutUniversity_get)
-router.get('/handleInstitute', adminController.handleInstitute_get)
-router.get('/addProduct', adminController.addProduct_get)
+router.get('/aboutUniversity/:id',requireAuth, adminController.aboutUniversity_get)
+router.get('/permitUser/:id/:userId',requireAuth, adminController.permitUser_get)
+router.get('/handleInstitute', requireAuth,adminController.handleInstitute_get)
+router.get('/addProduct',requireAuth, adminController.addProduct_get)
+
+
 module.exports = router
