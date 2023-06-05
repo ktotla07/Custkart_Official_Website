@@ -7,5 +7,5 @@ const { v4 } = require('uuid');
 
 const adminController = require('../controllers/adminController')
 router.get('/dashboard', adminController.dashboard_get)
-
+router.get('/aboutUniversity', adminController.aboutUniversity_get)
 module.exports = router
