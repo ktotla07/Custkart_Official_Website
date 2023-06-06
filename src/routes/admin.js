@@ -59,7 +59,13 @@ router.get('/aboutUniversity/:id',requireAuth, adminController.aboutUniversity_g
 router.get('/permitUser/:id/:userId',requireAuth, adminController.permitUser_get)
 router.get('/handleInstitute', requireAuth,adminController.handleInstitute_get)
 router.get('/addProduct',requireAuth, adminController.addProduct_get)
-router.get('/editProduct',requireAuth, adminController.editProduct_get)-
+router.get('/editProduct/:id',requireAuth, adminController.editProduct_get)
+router.post('/editSize/:id',requireAuth, adminController.editSize_post)
+router.post('/editStatus/:id',requireAuth, adminController.editStatus_post)
+router.post('/editName/:id',requireAuth, adminController.editName_post)
+router.post('/editPrice/:id',requireAuth, adminController.editPrice_post)
+router.post('/editDesc/:id',requireAuth, adminController.editDesc_post)
+
 router.post('/createProduct',requireAuth,
 upload.fields([{
     name: 'front', maxCount: 3
@@ -69,5 +75,5 @@ upload.fields([{
 
 
 
-  
+
 module.exports = router

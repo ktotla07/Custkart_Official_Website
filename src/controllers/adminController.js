@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const Document = require('../models/Document')
 const University = require('../models/University')
+const Products = require('../models/Products')
 const jwt = require('jsonwebtoken')
 const path = require('path')
 const Product = require('../models/Products')
@@ -24,9 +25,89 @@ module.exports.addProduct_get = async (req, res) => {
 }
 
 module.exports.editProduct_get = async (req, res) => {
-    res.render('./admin/editProduct')
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
+    res.render('./admin/editProduct',{
+        product
+    })
+}
+module.exports.editSize_post = async (req, res) => {
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
+    console.log(req.body)
+    //sizes
+    const sizes=req.body.sizes
+        if(!Array.isArray(sizes)){
+            await Products.findOneAndUpdate({ _id: id }, { $set: { sizes:[sizes] } }, { new: true }, (err, doc) => {
+                if (err) {
+                    res.redirect('/')
+                }
+            });
+        }else{
+            await Products.findOneAndUpdate({ _id: id }, { $set: { sizes } }, { new: true }, (err, doc) => {
+                if (err) {
+                    res.redirect('/')
+                }
+            });
+        }
+    res.render('./admin/editProduct',{
+        product
+    })
 }
 
+module.exports.editStatus_post = async (req, res) => {
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
+    console.log(req.body)
+    //sizes
+    const availability=req.body.availability
+        if(!Array.isArray(availability)){
+            await Products.findOneAndUpdate({ _id: id }, { $set: { availability } }, { new: true }, (err, doc) => {
+                if (err) {
+                    res.redirect('/')
+                }
+            });
+        }
+    res.render('./admin/editProduct',{
+        product
+    })
+}
+module.exports.editDesc_post = async (req, res) => {
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
+    await Products.findOneAndUpdate({ _id: id }, { $set: { desc:req.body.desc } }, { new: true }, (err, doc) => {
+        if (err) {
+            res.redirect('/')
+        }
+    });
+    res.render('./admin/editProduct',{
+        product
+    })
+}
+module.exports.editName_post = async (req, res) => {
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
+    await Products.findOneAndUpdate({ _id: id }, { $set: { name:req.body.name } }, { new: true }, (err, doc) => {
+        if (err) {
+            res.redirect('/')
+        }
+    });
+    res.render('./admin/editProduct',{
+        product
+    })
+}
+module.exports.editPrice_post = async (req, res) => {
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
+    await Products.findOneAndUpdate({ _id: id }, { $set: { price:req.body.price } }, { new: true }, (err, doc) => {
+        if (err) {
+            res.redirect('/')
+        }
+    });
+    res.render('./admin/editProduct',{
+        product
+    })
+}
 
 module.exports.handleInstitute_get = async (req, res) => {
     const universities = await University.find({})
