@@ -23,12 +23,19 @@ module.exports.addProduct_get = async (req, res) => {
     res.render('./admin/addProduct')
 }
 
+module.exports.editProduct_get = async (req, res) => {
+    res.render('./admin/editProduct')
+}
+
+
 module.exports.handleInstitute_get = async (req, res) => {
     const universities = await University.find({})
     res.render('./admin/handleInstitute', {
         universities
     })
 }
+
+
 
 module.exports.login_get = async (req, res) => {
 

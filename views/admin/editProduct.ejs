@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modernize Free</title>
+    <link rel="shortcut icon" type="image/png" href="/assetAdmin/admin/images/logos/favicon.png" />
+    <link rel="stylesheet" href="/assetAdmin/admin/css/styles.min.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Edit Product</h5>
+                    <div class="card mb-0">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="POST" action="/admin/createProduct" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <label for="product" class="form-label">Name</label>
+                                        <input type="text" name="name" class="form-control" id="product"
+                                            aria-describedby="product">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">Price</label>
+                                        <input type="price" name="price" class="form-control" id="price">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">Product Details</label>
+                                        <textarea id="productDetails" name="desc" class="form-control"
+                                            name="productDetails" rows="4" cols="50"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card mb-0">
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="POST" action="">
+                                    <label for="picture" class="form-label">Available Sizes</label>
+                                    <div class="mb-3">
+                                        <input type="checkbox" id="XS" name="XS" value="XS">
+                                        <label for="XS"> XS</label><br>
+                                        <input type="checkbox" id="S" name="S" value="S">
+                                        <label for="S"> S</label><br>
+                                        <input type="checkbox" id="M" name="M" value="M">
+                                        <label for="M"> M</label><br><br>
+                                        <input type="checkbox" id="L" name="L" value="L">
+                                        <label for="L"> L</label><br>
+                                        <input type="checkbox" id="XL" name="XL" value="XL">
+                                        <label for="XL"> XL</label><br>
+                                        <input type="checkbox" id="XXL" name="XXL" value="XXL">
+                                        <label for="XXL"> XXL</label><br><br>
+                                        <input type="checkbox" id="XXXL" name="XXXL" value="XXXL">
+                                        <label for="XXXL"> XXXL</label><br><br>
+                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="POST" action="">
+                                    <label for="picture" class="form-label">Status</label>
+                                    <div class="mb-3">
+                                        <input type="checkbox" id="XS" name="XS" value="XS">
+                                        <label for="XS"> In Stock</label><br>
+                                        <input type="checkbox" id="S" name="S" value="S">
+                                        <label for="S"> Out of Stock</label><br>
+                                        <input type="checkbox" id="M" name="M" value="M">
+                                        <label for="M"> Sale</label><br><br>
+                                        <input type="checkbox" id="L" name="L" value="L">
+                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assetAdmin/admin/libs/jquery/dist/jquery.min.js"></script>
+    <script src="/assetAdmin/admin/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assetAdmin/admin/js/sidebarmenu.js"></script>
+    <script src="/assetAdmin/admin/js/app.min.js"></script>
+    <script src="/assetAdmin/admin/libs/simplebar/dist/simplebar.js"></script>
+</body>
+
+</html>

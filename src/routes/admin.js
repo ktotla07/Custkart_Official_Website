@@ -59,7 +59,7 @@ router.get('/aboutUniversity/:id',requireAuth, adminController.aboutUniversity_g
 router.get('/permitUser/:id/:userId',requireAuth, adminController.permitUser_get)
 router.get('/handleInstitute', requireAuth,adminController.handleInstitute_get)
 router.get('/addProduct',requireAuth, adminController.addProduct_get)
-
+router.get('/editProduct',requireAuth, adminController.editProduct_get)-
 router.post('/createProduct',requireAuth,
 upload.fields([{
     name: 'front', maxCount: 3
