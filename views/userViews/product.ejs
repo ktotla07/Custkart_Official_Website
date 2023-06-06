@@ -132,7 +132,7 @@
                                         <div class="col-9 offset-1">
                                             <div>
                                                 <h6 class="justify-content-between d-flex align-items-start mb-2">
-                                                    Nike Air VaporMax 2021
+                                                    <%= product.name %>
                                                     <i class="ri-close-line ms-3"></i>
                                                 </h6>
                                                 <span class="d-block text-muted fw-bolder text-uppercase fs-9">Size: 9 / Qty: 1</span>
@@ -438,26 +438,20 @@
                 <!-- Product Images-->
                 <div class="col-12 col-md-6 col-xl-7">
                     <div class="row g-3" data-aos="fade-right">
+                        <% for(var img of product.front){ %>
                         <div class="col-12">
                             <picture>
-                            <img class="img-fluid" data-zoomable src="/assets/images/products/product-page-1.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
+                            <img class="img-fluid" data-zoomable src="<%=img%>" alt="HTML Bootstrap Template by Pixel Rocket">
                             </picture>
                         </div>
-                        <div class="col-12">
-                            <picture>
-                                <img class="img-fluid" data-zoomable src="/assets/images/products/product-page-2.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                            </picture>
-                        </div>
-                        <div class="col-12">
-                            <picture>
-                                <img class="img-fluid" data-zoomable src="/assets/images/products/product-page-3.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                            </picture>
-                        </div>
-                        <div class="col-12">
-                            <picture>
-                                <img class="img-fluid" data-zoomable src="/assets/images/products/product-page-4.jpeg" alt="HTML Bootstrap Template by Pixel Rocket">
-                            </picture>
-                        </div>
+                        <%}%>
+                        <% for(var img of product.back){ %>
+                            <div class="col-12">
+                                <picture>
+                                <img class="img-fluid" data-zoomable src="<%=img%>" alt="HTML Bootstrap Template by Pixel Rocket">
+                                </picture>
+                            </div>
+                            <%}%>
                     </div>
                 </div>
                 <!-- /Product Images-->
@@ -491,7 +485,7 @@
                             </div>
                             </div>
                             
-                            <h1 class="mb-1 fs-2 fw-bold">Kiikii Osaka Japan Mens T-Shirt Limited Edition</h1>
+                            <h1 class="mb-1 fs-2 fw-bold"><%=product.name%></h1>
                             <div class="d-flex justify-content-between align-items-center">
                                 <p class="fs-4 m-0">$34.99</p>
                             </div>

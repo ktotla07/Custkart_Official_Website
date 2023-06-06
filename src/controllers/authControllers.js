@@ -40,15 +40,17 @@ module.exports.about_get = (req, res) => {
 
 module.exports.productPage_get = async (req, res) => {
     const products=await Products.find({})
-    console.log(products)
+    console.log(products.length)
     res.render('./userViews/productPage', {
         products
     })
 }
 
-module.exports.product_get = (req, res) => {
+module.exports.product_get = async(req, res) => {
+    const id=req.params.id
+    const product=await Products.findOne({_id:id})
     res.render('./userViews/product', {
-        type: 'product',
+        product
     })
 }
 
