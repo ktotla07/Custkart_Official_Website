@@ -104,7 +104,7 @@ module.exports.createPost = async (req, res) => {
             height: 1000,
             Crop: 'fill'
         });
-        front.push(url)
+        back.push(url)
     }
     // console.log(front,back)
     const product = new Product({ name, desc,price,front,back})

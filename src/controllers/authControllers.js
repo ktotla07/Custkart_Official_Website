@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const University = require('../models/University')
 const Document = require('../models/Document')
+const Products = require('../models/Products')
 const jwt = require('jsonwebtoken')
 const { signupMail, passwordMail } = require('../config/nodemailer')
 const path = require('path')
@@ -37,9 +38,11 @@ module.exports.about_get = (req, res) => {
     })
 }
 
-module.exports.productPage_get = (req, res) => {
+module.exports.productPage_get = async (req, res) => {
+    const products=await Products.find({})
+    console.log(products)
     res.render('./userViews/productPage', {
-        type: 'productPage',
+        products
     })
 }
 

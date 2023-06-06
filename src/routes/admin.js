@@ -67,4 +67,7 @@ upload.fields([{
     name: 'back', maxCount: 3
   }]),adminController.createPost)
 
+
+
+  
 module.exports = router
