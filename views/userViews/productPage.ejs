@@ -453,9 +453,10 @@
 
             <!-- Products-->
             <div class="row g-4">
+                <% for(var product of products){ %>
                     <div class="col-12 col-sm-6 col-lg-4">
                         <!-- Card Product-->
-                        <% for(var product of products){ %>
+                        
                         <div class="card border border-transparent position-relative overflow-hidden h-100 transparent">
                             <div class="card-img position-relative">
                                 <div class="card-badges">
@@ -475,9 +476,10 @@
                                         <p class="mt-2 mb-0 small"> <span class="text-danger">$<%=product.price%></span></p>
                             </div>
                         </div>
-                        <%}%>
+                       
                         <!--/ Card Product-->
                     </div>
+                <%}%>
             </div>
             <!-- / Products-->
 
