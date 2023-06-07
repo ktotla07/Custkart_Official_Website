@@ -18,16 +18,22 @@
                     <div class="card mb-0">
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="/admin/createProduct" enctype="multipart/form-data">
+                                <form method="POST" action="/admin/editName/<%=product._id%>">
                                     <div class="mb-3">
                                         <label for="product" class="form-label">Name</label>
                                         <input type="text" name="name" class="form-control" id="product"
                                             aria-describedby="product">
                                     </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                <form method="POST" action="/admin/editPrice/<%=product._id%>">
                                     <div class="mb-3">
                                         <label for="price" class="form-label">Price</label>
                                         <input type="price" name="price" class="form-control" id="price">
                                     </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                                <form method="POST" action="/admin/editDesc/<%=product._id%>">
                                     <div class="mb-3">
                                         <label for="price" class="form-label">Product Details</label>
                                         <textarea id="productDetails" name="desc" class="form-control"
@@ -43,22 +49,22 @@
                     <div class="container-fluid">
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="">
+                                <form method="POST" action="/admin/editSize/<%=product._id%>">
                                     <label for="picture" class="form-label">Available Sizes</label>
                                     <div class="mb-3">
-                                        <input type="checkbox" id="XS" name="XS" value="XS">
+                                        <input type="checkbox" id="XS" name="sizes" value="XS">
                                         <label for="XS"> XS</label><br>
-                                        <input type="checkbox" id="S" name="S" value="S">
+                                        <input type="checkbox" id="S" name="sizes" value="S">
                                         <label for="S"> S</label><br>
-                                        <input type="checkbox" id="M" name="M" value="M">
+                                        <input type="checkbox" id="M" name="sizes" value="M">
                                         <label for="M"> M</label><br><br>
-                                        <input type="checkbox" id="L" name="L" value="L">
+                                        <input type="checkbox" id="L" name="sizes" value="L">
                                         <label for="L"> L</label><br>
-                                        <input type="checkbox" id="XL" name="XL" value="XL">
+                                        <input type="checkbox" id="XL" name="sizes" value="XL">
                                         <label for="XL"> XL</label><br>
-                                        <input type="checkbox" id="XXL" name="XXL" value="XXL">
+                                        <input type="checkbox" id="XXL" name="sizes" value="XXL">
                                         <label for="XXL"> XXL</label><br><br>
-                                        <input type="checkbox" id="XXXL" name="XXXL" value="XXXL">
+                                        <input type="checkbox" id="XXXL" name="sizes" value="XXXL">
                                         <label for="XXXL"> XXXL</label><br><br>
                                         <input type="submit" class="btn btn-primary" value="Submit">
                                     </div>
@@ -69,15 +75,15 @@
                     <div class="container-fluid">
                         <div class="card">
                             <div class="card-body">
-                                <form method="POST" action="">
+                                <form method="POST" action="/admin/editStatus/<%=product._id%>">
                                     <label for="picture" class="form-label">Status</label>
                                     <div class="mb-3">
-                                        <input type="checkbox" id="XS" name="XS" value="XS">
-                                        <label for="XS"> In Stock</label><br>
-                                        <input type="checkbox" id="S" name="S" value="S">
-                                        <label for="S"> Out of Stock</label><br>
-                                        <input type="checkbox" id="M" name="M" value="M">
-                                        <label for="M"> Sale</label><br><br>
+                                        <input type="checkbox" id="In_Stock" name="availability" value="In_Stock">
+                                        <label for="In_Stock"> In Stock</label><br>
+                                        <input type="checkbox" id="Out_of_Stock" name="availability" value="Out_of_Stock">
+                                        <label for="Out_of_Stock"> Out of Stock</label><br>
+                                        <input type="checkbox" id="Sale" name="availability" value="Sale">
+                                        <label for="Sale"> Sale</label><br><br>
                                         <input type="submit" class="btn btn-primary" value="Submit">
                                     </div>
                             </div>

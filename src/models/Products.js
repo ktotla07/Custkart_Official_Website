@@ -14,6 +14,14 @@ const productSchema = mongoose.Schema({
         type: String,
         trim: true,
     },
+    sizes:[{
+        type: String,
+        trim: true,
+    }],
+    availability:{
+        type: String,
+        trim: true,
+    },
     front:[{
         type: String,
         trim: true,

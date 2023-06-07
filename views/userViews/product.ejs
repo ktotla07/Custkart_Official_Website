@@ -572,7 +572,9 @@
                                 </div>
                             </div>
                             <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow">Add To Shopping Bag</button>
-                            <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow" ><a href="/admin/editProduct">Edit</a></button>
+                            <% if(isAdmin) {%>
+                            <a class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow"  href="/admin/editProduct/<%=product._id%>">Edit</a>
+                            <% } %>
                             <!-- Product Highlights-->
                                 <div class="my-5">
                                     <div class="row">

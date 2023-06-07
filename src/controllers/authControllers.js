@@ -49,8 +49,14 @@ module.exports.productPage_get = async (req, res) => {
 module.exports.product_get = async(req, res) => {
     const id=req.params.id
     const product=await Products.findOne({_id:id})
+    const token=req.cookies.admin
+    var isAdmin=false
+    if(token){
+        isAdmin=true
+    }
     res.render('./userViews/product', {
-        product
+        product,
+        isAdmin
     })
 }
 
