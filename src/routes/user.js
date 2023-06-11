@@ -61,7 +61,7 @@ router.get('/about', authController.about_get)
 router.post('/createPost',requireAuth,upload.single('photo'), authController.createPost)
 router.get('/productPage', authController.productPage_get)
 router.get('/product/:id', authController.product_get)
-
+router.get('/uploadDesign', authController.uploadDesign_get)
 router.get('/requestUniversity/:id',requireAuth, authController.requestUniversity)
 
 

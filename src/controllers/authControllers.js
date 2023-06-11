@@ -46,6 +46,13 @@ module.exports.productPage_get = async (req, res) => {
     })
 }
 
+module.exports.uploadDesign_get = (req, res) => {
+    res.render('./userViews/uploadDesign', {
+        type: 'uploadDesign'
+    })
+}
+
+
 module.exports.product_get = async(req, res) => {
     const id=req.params.id
     const product=await Products.findOne({_id:id})
