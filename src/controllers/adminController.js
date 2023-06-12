@@ -169,7 +169,7 @@ module.exports.permitUser_get = async (req, res) => {
     // })
 }
 module.exports.createPost = async (req, res) => {
-    const { name, desc,price } = req.body
+    const { name, desc,price,category } = req.body
     // console.log(req.files)
     const front = [], back = []
     for (var i of req.files.front) {
@@ -195,7 +195,7 @@ module.exports.createPost = async (req, res) => {
         back.push(url)
     }
     // console.log(front,back)
-    const product = new Product({ name, desc,price,front,back})
+    const product = new Product({ name, desc,price,front,back,category})
       let saveProduct = await product.save()
     res.send(saveProduct)
 }
