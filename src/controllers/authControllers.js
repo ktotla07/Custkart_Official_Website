@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Bag = require('../models/Bag')
 const University = require('../models/University')
 const Document = require('../models/Document')
 const Products = require('../models/Products')
@@ -17,7 +18,7 @@ cloudinary.config({
     cloud_name: "dxjcjsopt",
     api_key: "776272262761276",
     api_secret: "ZvhJVjaKl4CTKyDJIN-xKfNOit4"
-  });
+});
 
 // controller actions
 module.exports.signup_get = (req, res) => {
@@ -39,7 +40,7 @@ module.exports.about_get = (req, res) => {
 }
 
 module.exports.productPage_get = async (req, res) => {
-    const products=await Products.find({})
+    const products = await Products.find({})
     console.log(products.length)
     res.render('./userViews/productPage', {
         products
@@ -53,13 +54,13 @@ module.exports.uploadDesign_get = (req, res) => {
 }
 
 
-module.exports.product_get = async(req, res) => {
-    const id=req.params.id
-    const product=await Products.findOne({_id:id})
-    const token=req.cookies.admin
-    var isAdmin=false
-    if(token){
-        isAdmin=true
+module.exports.product_get = async (req, res) => {
+    const id = req.params.id
+    const product = await Products.findOne({ _id: id })
+    const token = req.cookies.admin
+    var isAdmin = false
+    if (token) {
+        isAdmin = true
     }
     res.render('./userViews/product', {
         product,
@@ -69,7 +70,7 @@ module.exports.product_get = async(req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
-    
+
     console.log('in sign up route', req.body)
     if (password != confirmPwd) {
         req.flash('error_msg', 'Passwords do not match. Try again')
@@ -94,7 +95,7 @@ module.exports.signup_post = async (req, res) => {
             )
             return res.redirect('/user/login')
         }
-        const short_id = generateShortId(name,phoneNumber);
+        const short_id = generateShortId(name, phoneNumber);
         // console.log('Short ID generated is: ', short_id)
         const user = new User({
             email,
@@ -102,7 +103,7 @@ module.exports.signup_post = async (req, res) => {
             password,
             phoneNumber,
             short_id,
-            
+
         })
         let saveUser = await user.save()
         //console.log(saveUser);
@@ -182,7 +183,7 @@ module.exports.login_post = async (req, res) => {
         //console.log("user",user)
 
         const userExists = await User.findOne({ email })
-        console.log("userexsits",userExists)
+        console.log("userexsits", userExists)
 
         if (!userExists.active) {
             const currDate = new Date()
@@ -232,35 +233,35 @@ module.exports.login_post = async (req, res) => {
 
 
 module.exports.profile_get = async (req, res) => {
-    
+
     res.json(req.user)
     // console.log('in profile page')
 }
 module.exports.createPost = async (req, res) => {
-    const {name,desc}=req.body
-    const picture =req.file.path
-    const result=await cloudinary.uploader.upload(picture, {public_id: "uploaded"})
+    const { name, desc } = req.body
+    const picture = req.file.path
+    const result = await cloudinary.uploader.upload(picture, { public_id: "uploaded" })
     // console.log(result.secure_url)
-    
-      const url = cloudinary.url("uploaded", {
+
+    const url = cloudinary.url("uploaded", {
         width: 1500,
         height: 1000,
         Crop: 'fill'
-      });
-      console.log(url)
-      const document = new Document({ name, desc,url,user:req.user._id})
-      let saveDocument = await document.save()
-      const userDoc=req.user.document
-      userDoc.push(document._id)
-      await Document.findOneAndUpdate({_id: req.user._id}, {$set:{document:userDoc}}, {new: true}, (err, doc) => {
+    });
+    console.log(url)
+    const document = new Document({ name, desc, url, user: req.user._id })
+    let saveDocument = await document.save()
+    const userDoc = req.user.document
+    userDoc.push(document._id)
+    await Document.findOneAndUpdate({ _id: req.user._id }, { $set: { document: userDoc } }, { new: true }, (err, doc) => {
         if (err) {
             // console.log("Something wrong when updating data!");
             req.flash("error_msg", "Something wrong when updating data!")
             res.redirect('/')
         }
     });
-      
-      console.log(saveDocument)
+
+    console.log(saveDocument)
     res.render('./userViews/index')
 }
 
@@ -368,12 +369,12 @@ module.exports.resetPassword = async (req, res) => {
 }
 
 module.exports.requestUniversity = async (req, res) => {
-    const id=req.params.id
+    const id = req.params.id
     const university = await University.findOne({ _id: id })
-    const requestedUsers=university.requestedUsers
-    if(!requestedUsers.includes(req.user._id)){
+    const requestedUsers = university.requestedUsers
+    if (!requestedUsers.includes(req.user._id)) {
         requestedUsers.push(req.user._id)
-        await University.findOneAndUpdate({_id: id}, {$set:{requestedUsers}}, {new: true}, (err, doc) => {
+        await University.findOneAndUpdate({ _id: id }, { $set: { requestedUsers } }, { new: true }, (err, doc) => {
             if (err) {
                 res.redirect('/')
             }
@@ -385,6 +386,39 @@ module.exports.requestUniversity = async (req, res) => {
 
 
 
+module.exports.bag_post = async (req, res) => {
+    const productId = req.params.id
+    const product = await Products.findOne({ _id: productId })
+    const size = req.body.size
+    const quantity=req.body.quantity
+    const bag = new Bag({ name: product.name, quantity,size, price: product.price, productAdmin: productId, user: req.user._id })
+    let saveBag = await bag.save()
+    const allBag=req.user.bag
+    allBag.push(saveBag._id)
+    const updatedUser=await User.findOneAndUpdate({ _id: req.user._id }, { $set: { bag: allBag } }, { new: true }, (err, doc) => {
+        if (err) {
+            // console.log("Something wrong when updating data!");
+            req.flash("error_msg", "Something wrong when updating data!")
+            res.redirect('/')
+        }
+    });
+    console.log(bag)
+    res.redirect(`/user/product/${productId}`)
+}
 
-
+module.exports.bag_get = async (req, res) => {
+    const user=await req.user.populate('bag').execPopulate()
+    const _bag=user.bag
+    
+    var total=0
+    for(var p of _bag){
+        total=total+parseInt(p.price)
+        await p.populate('productAdmin').execPopulate()
+    }
+    const bag=_bag
+    console.log(_bag)
+    res.render(`./userViews/cart`,{
+        bag,total
+    })
+}
 

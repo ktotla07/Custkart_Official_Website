@@ -70,6 +70,8 @@ router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)
 router.get('/resetPassword/:id/:token',authController.getPasswordResetForm)
 router.post('/resetPassword/:id/:token',authController.resetPassword)
 
+router.post('/bag/:id',requireAuth,authController.bag_post)
+router.get('/bag',requireAuth,authController.bag_get)
 
 
 

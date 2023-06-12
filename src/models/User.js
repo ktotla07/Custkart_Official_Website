@@ -26,6 +26,12 @@ const userSchema = mongoose.Schema(
                 ref: 'Document',
             },
         ],
+        bag: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Bag',
+            },
+        ],
         email: {
             type: String,
             trim: true,
