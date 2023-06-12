@@ -186,39 +186,53 @@
         <div class="row">
           <div class="col-lg-8 d-flex align-items-strech">
             <div class="card w-100">
-                      <h5 class="card-title fw-semibold mb-4">Add Product</h5>
-                      <div class="card mb-0">
-                                  <div class="card">
-                                    <div class="card-body">
-                                      <form method="POST" action="/admin/createProduct"
-                                      enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                          <label for="product" class="form-label">Name</label>
-                                          <input type="text" name="name" class="form-control" id="product" aria-describedby="product">
-                                        </div>
-                                        <div class="mb-3">
-                                          <label for="picture" class="form-label">Front Image</label>
-                                          <input type="file" id="file" name="front"class="form-control" name="file" multiple />
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="picture" class="form-label">Back Image</label>
-                                            <input type="file" id="file"name="back" class="form-control" name="file" multiple />
-                                          </div>
-                                         <div class="mb-3">
-                                            <label for="price" class="form-label">Price</label>
-                                            <input type="price"name="price" class="form-control" id="price">
-                                          </div>
-                                          <div class="mb-3">
-                                            <label for="price" class="form-label">Product Details</label>
-                                            <textarea id="productDetails"name="desc"  class="form-control" name="productDetails" rows="4" cols="50"></textarea>
-                                          </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                      </form>
-                                    </div>
-                                  </div>
-                                  <div class="card mb-0">
-                            </div>
+              <h5 class="card-title fw-semibold mb-4">Add Product</h5>
+              <div class="card mb-0">
+                <div class="card">
+                  <div class="card-body">
+                    <form method="POST" action="/admin/createProduct" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <label for="product" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="product" aria-describedby="product">
                       </div>
+                      <div class="mb-3">
+                        <label for="picture" class="form-label">Front Image</label>
+                        <input type="file" id="file" name="front" class="form-control" name="file" multiple />
+                      </div>
+                      <div class="mb-3">
+                        <label for="picture" class="form-label">Back Image</label>
+                        <input type="file" id="file" name="back" class="form-control" name="file" multiple />
+                      </div>
+                      <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="price" name="price" class="form-control" id="price">
+                      </div>
+                      <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <br>
+                        <input type="checkbox" class="form-label" id="vehicle1" name="category" value="T-Shirt"onclick="onlyOne(this)">
+                        <label for="vehicle1"> T-Shirt</label><br>
+                        <input type="checkbox" class="form-label" id="vehicle2" name="category" value="Hoodie"onclick="onlyOne(this)">
+                        <label for="vehicle2"> Hoodie</label><br>
+                        <input type="checkbox" class="form-label" id="vehicle3" name="category" value="Cap"onclick="onlyOne(this)">
+                        <label for="vehicle3"> Cap</label>
+                        <br>
+                        <input type="checkbox" class="form-label" id="vehicle4" name="category" value="Bag"onclick="onlyOne(this)">
+                        <label for="vehicle4"> Bag</label><br><br>
+                     
+                      </div>
+                      <div class="mb-3">
+                        <label for="price" class="form-label">Product Details</label>
+                        <textarea id="productDetails" name="desc" class="form-control" name="productDetails" rows="4"
+                          cols="50"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="card mb-0">
+                </div>
+              </div>
                         
                           </div>
                       </div>
