@@ -63,7 +63,7 @@ router.get('/productPage', authController.productPage_get)
 router.get('/product/:id', authController.product_get)
 router.get('/uploadDesign', authController.uploadDesign_get)
 router.get('/requestUniversity/:id',requireAuth, authController.requestUniversity)
-
+router.get('/makeDesign', authController.makeDesign_get)
 
 router.get('/forgotPassword', redirectIfLoggedIn,authController.getForgotPasswordForm)
 router.post('/forgotPassword', redirectIfLoggedIn,authController.forgotPassword)

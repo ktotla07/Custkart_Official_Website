@@ -53,6 +53,12 @@ module.exports.uploadDesign_get = (req, res) => {
     })
 }
 
+module.exports.makeDesign_get = (req, res) => {
+    res.render('./userViews/makeDesign', {
+        type: 'makeDesign'
+    })
+}
+
 
 module.exports.product_get = async (req, res) => {
     const id = req.params.id
