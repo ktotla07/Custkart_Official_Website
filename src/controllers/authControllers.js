@@ -417,6 +417,7 @@ module.exports.bag_get = async (req, res) => {
     const _bag=user.bag
     
     var total=0
+    
     for(var p of _bag){
         total=total+parseInt(p.price)
         await p.populate('productAdmin').execPopulate()
