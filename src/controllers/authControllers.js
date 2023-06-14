@@ -47,6 +47,12 @@ module.exports.productPage_get = async (req, res) => {
     })
 }
 
+module.exports.becomeambassador_get = async (req, res) => {
+    res.render('./userViews/becomeambassador', {
+        type: 'becomeambassador'
+    })
+}
+
 module.exports.uploadDesign_get = (req, res) => {
     res.render('./userViews/uploadDesign', {
         type: 'uploadDesign'
