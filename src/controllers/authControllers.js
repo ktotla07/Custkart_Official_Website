@@ -246,8 +246,9 @@ module.exports.login_post = async (req, res) => {
 
 module.exports.profile_get = async (req, res) => {
 
-    res.json(req.user)
-    // console.log('in profile page')
+    res.render('./userViews/profile', {
+        type: 'profile',
+    })
 }
 module.exports.createPost = async (req, res) => {
     const { name, desc } = req.body
@@ -423,6 +424,7 @@ module.exports.bag_get = async (req, res) => {
     const _bag=user.bag
     
     var total=0
+    
     for(var p of _bag){
         total=total+parseInt(p.price)
         await p.populate('productAdmin').execPopulate()

@@ -18,6 +18,12 @@ cloudinary.config({
   });
 
 // controller actions
+module.exports.dashboard_get = (req, res) => {
+    res.render('./university/dashboard', {
+        type: 'dashboard',
+    })
+}
+
 module.exports.signup_get = (req, res) => {
     res.render('./userViews/signupInstitute', {
         type: 'signup',
@@ -29,13 +35,6 @@ module.exports.login_get = (req, res) => {
         type: 'login',
     })
 }
-
-module.exports.dashboard_get = (req, res) => {
-    res.render('./admin/dashboard', {
-        type: 'dashboard',
-    })
-}
-
 
 module.exports.signup_post = async (req, res) => {
     const { name, email, password, confirmPwd, phoneNumber } = req.body
